@@ -22,6 +22,8 @@
 		B6FF6CF4180441140088CD5F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6FF6CD3180441140088CD5F /* UIKit.framework */; };
 		B6FF6CFC180441140088CD5F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B6FF6CFA180441140088CD5F /* InfoPlist.strings */; };
 		B6FF6CFE180441140088CD5F /* MyBeaconsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FF6CFD180441140088CD5F /* MyBeaconsTests.m */; };
+		B6FF6D081804416C0088CD5F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6FF6D071804416C0088CD5F /* CoreBluetooth.framework */; };
+		B6FF6D0A180444DB0088CD5F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6FF6D09180444DB0088CD5F /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		B6FF6CF9180441140088CD5F /* MyBeaconsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyBeaconsTests-Info.plist"; sourceTree = "<group>"; };
 		B6FF6CFB180441140088CD5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B6FF6CFD180441140088CD5F /* MyBeaconsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyBeaconsTests.m; sourceTree = "<group>"; };
+		B6FF6D071804416C0088CD5F /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		B6FF6D09180444DB0088CD5F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6FF6D0A180444DB0088CD5F /* CoreLocation.framework in Frameworks */,
+				B6FF6D081804416C0088CD5F /* CoreBluetooth.framework in Frameworks */,
 				B6FF6CD2180441140088CD5F /* CoreGraphics.framework in Frameworks */,
 				B6FF6CD4180441140088CD5F /* UIKit.framework in Frameworks */,
 				B6FF6CD0180441140088CD5F /* Foundation.framework in Frameworks */,
@@ -103,6 +109,8 @@
 		B6FF6CCE180441140088CD5F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B6FF6D09180444DB0088CD5F /* CoreLocation.framework */,
+				B6FF6D071804416C0088CD5F /* CoreBluetooth.framework */,
 				B6FF6CCF180441140088CD5F /* Foundation.framework */,
 				B6FF6CD1180441140088CD5F /* CoreGraphics.framework */,
 				B6FF6CD3180441140088CD5F /* UIKit.framework */,
@@ -114,6 +122,7 @@
 		B6FF6CD5180441140088CD5F /* MyBeacons */ = {
 			isa = PBXGroup;
 			children = (
+				B6FF6D0B1804615D0088CD5F /* iPad */,
 				B6FF6CDE180441140088CD5F /* RLBAppDelegate.h */,
 				B6FF6CDF180441140088CD5F /* RLBAppDelegate.m */,
 				B6FF6CE1180441140088CD5F /* Main_iPhone.storyboard */,
@@ -153,6 +162,13 @@
 				B6FF6CFA180441140088CD5F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B6FF6D0B1804615D0088CD5F /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +219,13 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Randy Bradshaw";
 				TargetAttributes = {
+					B6FF6CCB180441140088CD5F = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					B6FF6CEF180441140088CD5F = {
 						TestTargetID = B6FF6CCB180441140088CD5F;
 					};
@@ -396,7 +419,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyBeacons/MyBeacons-Prefix.pch";
 				INFOPLIST_FILE = "MyBeacons/MyBeacons-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -409,7 +434,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyBeacons/MyBeacons-Prefix.pch";
 				INFOPLIST_FILE = "MyBeacons/MyBeacons-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

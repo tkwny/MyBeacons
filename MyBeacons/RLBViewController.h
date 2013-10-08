@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
-@interface RLBViewController : UIViewController
+
+@interface RLBViewController : UIViewController <CLLocationManagerDelegate, CBPeripheralManagerDelegate, UITableViewDelegate, UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UISwitch *advertisingSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *rangingSwitch;
+@property (weak, nonatomic) IBOutlet UITableView *beaconsTableView;
 
 @end
