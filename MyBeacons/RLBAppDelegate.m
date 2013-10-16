@@ -24,8 +24,21 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    /*
+    NSDate *alertTime = [[NSDate date] dateByAddingTimeInterval:10];
+    UIApplication* app = [UIApplication sharedApplication];
+    UILocalNotification* notifiyAlarm = [[UILocalNotification alloc] init];
+    if(notifiyAlarm)
+    {
+        notifiyAlarm.fireDate = alertTime;
+        notifiyAlarm.timeZone = [NSTimeZone defaultTimeZone];
+        notifiyAlarm.repeatInterval = 0;
+        notifiyAlarm.soundName = @"bell_tree.mp3";
+        notifiyAlarm.alertBody = @"Locating iBeacons";
+        [app scheduleLocalNotification:notifiyAlarm];
+     }
+     */
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -42,5 +55,15 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+-(BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+-(BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+
 
 @end

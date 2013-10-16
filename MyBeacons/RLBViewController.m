@@ -8,9 +8,11 @@
 
 #import "RLBViewController.h"
 
-static NSString * const kUUID = @"00000000-0000-0000-0000-000000000000";
-static NSString * const kIdentifier = @"SomeIdentifier";
-static NSString * const kCellIdentifier = @"BeaconCell";
+static NSString * const kUUID = @"B9407F30-F5F8-466E-AFF9-25556B57FE6D";
+static NSString * const kIdentifier = @"CHLabs";
+static NSString * const kCellIdentifier = @"DefaultCell";
+static NSInteger beaconMajor = 2895;
+static NSInteger beaconMinor = 2;
 
 
 @interface RLBViewController ()
@@ -43,7 +45,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     
     NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:kUUID];
     self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:kIdentifier];
-    
+    self.beaconRegion.notifyEntryStateOnDisplay = TRUE;
 }
 
 -(void)turnOnRanging
@@ -138,6 +140,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     if ([beacons count] == 0)
     {
         NSLog(@"No beacons found nearby.");
+
     }
     else
     {
@@ -160,8 +163,8 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     time_t t;
     srand((unsigned) time(&t));
     CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:self.beaconRegion.proximityUUID
-                                                                     major:rand()
-                                                                     minor:rand()
+                                                                     major:beaconMajor
+                                                                     minor:beaconMinor
                                                                 identifier:self.beaconRegion.identifier];
     
     NSDictionary *beaconPeripheralData = [region peripheralDataWithMeasuredPower:nil];
@@ -239,23 +242,29 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     NSString *proximityString;
     switch (beacon.proximity) {
         case CLProximityNear:
-            proximityString =@"Beacon near!";
+            proximityString =@"NEAR!";
             break;
         case CLProximityImmediate:
-            proximityString =@"Beacon immediate!";
+            proximityString =@"IMMEDIATE!";
             break;
         case CLProximityFar:
-            proximityString =@"Beacon far away!";
+            proximityString =@"FAR!";
             break;
         case CLProximityUnknown:
-            proximityString =@"Beacon location unknown";
+            proximityString =@"UNKNOWN!";
             break;
     }
     
-    defaultCell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@ • %@ • %f • %li",
-                                        beacon.major.stringValue, beacon.minor.stringValue, proximityString, beacon.accuracy, (long)beacon.rssi];
-    defaultCell.detailTextLabel.textColor = [UIColor blueColor];
+    defaultCell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@ •  %@ • %@ • %f • %li",
+                                        self.beaconRegion.identifier,
+                                        beacon.major.stringValue,
+                                        beacon.minor.stringValue,
+                                        proximityString,
+                                        beacon.accuracy,
+                                        (long)beacon.rssi];
     
+    defaultCell.detailTextLabel.textColor = [UIColor blueColor];
+
     return defaultCell;
     
 }
@@ -269,6 +278,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 {
     return self.detectedBeacons.count;
 }
+
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
